@@ -1,106 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Square {
-
-    public string name;
-
-    public Square(string name) {
-        this.name = name;
-    }
-}
-public class Property : Square {
-    public double price;
-    public int owner = -1;
-
-    public Property(string name, double price, int owner) : base(name) {
-        this.name = name;
-        this.price = price;
-        this.owner = owner;
-    }
-}
-
-public class Player {
-    public string name = "Player"; 
-    public int position = 0;
-    public double cash = 1500.00;
-    public int getOutOfJailFreeCards = 0;
-    public Player(string name, int position, double cash, int getOutOfJailFreeCards) {
-
-        this.name = name;
-        this.position = position;
-        this.cash = cash;
-        this.getOutOfJailFreeCards = getOutOfJailFreeCards;
-
-    }
-
-}
-
-public class Ai : Player {
-    public int intensity;
-    public Ai(string name, int position, double cash, int getOutOfJailFreeCards, int intensity) : base(name, position, cash, getOutOfJailFreeCards) {
-        this.intensity = intensity;
-    }
-    //what kind of actions will ai perform (other than roll)
-    public string autoAction() {
-
-        Random random = new Random();
-
-        string perform = "nothing";
-
-        if (intensity < 0 || intensity > 20) {
-
-            intensity = 0;
-
-        }
-
-        int commandType = random.Next(intensity, 21);
-
-        if (commandType < 4) {
-
-            return perform;
-
-        }
-        else if (commandType > 4 && commandType < 9) {
-
-            perform  = "buy";
-
-        }
-        else if (commandType > 9 && commandType < 14) {
-
-            perform = "steal";
-
-        }
-        else {
-
-            perform = "buy and steal";
-
-        }
-
-        return perform;
-
-    }
-
-}
 class Program {
     static List<Square> board = new List<Square>();
     static List<Player> player = new List<Player>();
-
     public static double goal = 5000.00;
     static Random random = new Random();
-
-    public static Player passGo(Player player) {
-
-        double goPayment = 1000.0;
-
-        player.cash += goPayment;
-
-        Console.WriteLine($"{player.name} passed Go and earned ${goPayment}");
-
-        return player;
-
-    }
-
     public static void help() {
         
         Console.WriteLine($"earn ${goal} in order to win");
@@ -113,185 +18,15 @@ class Program {
         Console.WriteLine("");
 
     }
-
-    public static Player goToJail(Player player) {
-
-        if (player.getOutOfJailFreeCards > 0) {
-
-            player.getOutOfJailFreeCards--;
-
-            Console.WriteLine($"{player.name} used Get Out of Jail Free Card");
-
-            Console.ReadKey(true);
-
-        }
-        else {
-
-            double fine = 50.0;
-
-            Console.WriteLine($"{player.name} has been sent to jail!");
-            Console.ReadKey(true);
-            Console.WriteLine($"{player.name} payed a ${fine}");
-            Console.ReadKey(true);
-
-            player.cash -= fine;
-
-            //current position is 10 but keep track if more Squares are added to board!
-            player.position = 10;
-
-        }
-
-        return player;
-
-    }
-
-    public static Player steal(Player player) {
-
-        Console.WriteLine("How much will you steal?");
-
-        double amount = 0.0;
-
-        try {
-            
-            amount = Convert.ToDouble(Console.ReadLine());
-
-            double bank = (double) random.Next(1, 501);
-
-            Console.WriteLine($"The banker will notice if ${bank} is gone");
-
-            if (!amount.Equals(null)) {
-
-                if (amount < bank) {
-
-                    Console.WriteLine($"You stole ${amount} from the bank!");
-
-                    player.cash += amount;
-
-                    return player;
-
-                }
-                else {
-
-                    Console.WriteLine($"The banker caught you stealing ${amount}!");
-
-                    return goToJail(player);
-
-                }
-
-            }
-
-        }
-        catch (Exception e) {
-
-            Console.WriteLine(e.Message);
-
-            Console.WriteLine("You decided stealing is wrong!");
-
-            return player;
-
-        }
-
-        return player;
-
-    }
-
-    public static Player tax(Player player) {
-
-        double taxMoney = player.cash * 0.10;
-
-        Console.WriteLine($"{player.name} payed 10% of cash (${taxMoney}) to the bank.");
-        Console.ReadKey(true);
-
-        player.cash -= taxMoney;
-
-        return player;
-
-    }
-    
-    public static Player ChanceCard(Player player) {
-
-        int cardType = random.Next(0, 5);
-
-        double payment = 0.0;
-
-        switch(cardType) {
-
-            //player pays bank
-            case 0: {
-
-                payment = (double) random.Next(0, 301);
-
-                Console.WriteLine($"{player.name} paid the bank ${payment}");
-                Console.ReadKey(true);
-
-                player.cash -= payment;
-
-                break;
-
-            }
-            //player earns cash
-            case 1: {
-
-                payment = (double) random.Next(0, 501);
-
-                Console.WriteLine($"{player.name} earned ${payment}!");
-                Console.ReadKey(true);
-
-                player.cash += payment;
-
-                break;
-
-            }
-            //player zooms
-            case 2: {
-
-                int zoomed = random.Next(0, 23);
-
-                if (zoomed < player.position) {
-
-                    player = passGo(player);
-
-                }
-
-                player.position = zoomed;
-
-                break;
-
-            }
-            case 3: {
-
-                player = goToJail(player);
-
-                break;
-
-            }
-            case 4: {
-
-                Console.WriteLine($"{player.name} got a Get Out of Jail Free Card!");
-
-                Console.ReadKey(true);
-
-                player.getOutOfJailFreeCards++;
-
-                break;
-
-            }
-
-        }
-
-        return player;
-
-    }
     public static void Main() {
 
         player.Add(new Player("Player 1", 0, 1500, 0));
-        player.Add(new Player("Player 2", 0, 1500, 0));
+        //player.Add(new Player("Player 2", 0, 1500, 0));
         player.Add(new Ai("Inky", 0, 1500, 0, 2));
-        player.Add(new Ai("Blinky", 0, 1500, 0, 4));
-        player.Add(new Ai("Pinky", 0, 1500, 0, 6));
-        player.Add(new Ai("Clyde", 0, 1500, 0, 20));
+        //player.Add(new Ai("Blinky", 0, 1500, 0, 4));
+        //player.Add(new Ai("Pinky", 0, 1500, 0, 6));
+        //player.Add(new Ai("Clyde", 0, 1500, 0, 20));
         
-
         //add squares to the board
         board.Add(new Square("Go"));
         board.Add(new Property("Mediterranean Avenue", 60.0, -1));
@@ -303,7 +38,9 @@ class Program {
         board.Add(new Property("Vermont Avenue", 100.0, -1));
         board.Add(new Square("Chance Square"));
         board.Add(new Property("Connecticut Avenue", 120.0, -1));
+        //Keep Track of this Element number
         board.Add(new Square("Jail"));
+        //Must update goToJail method in Player class if more Squares or properties are enough
         board.Add(new Property("St. Charles Place", 140.0, -1));
         board.Add(new Property("States Avenue", 140.0, -1));
         board.Add(new Property("Virginia Avenue", 160.0, -1));
@@ -312,9 +49,7 @@ class Program {
         board.Add(new Square("Chance Square"));
         board.Add(new Property("Tennessee Avenue", 180.0, -1));
         board.Add(new Property("New York Avenue", 200.0, -1));
-
         board.Add(new Square("FREE PARKING"));
-
         board.Add(new Property("Kentucky Avenue", 220.0, -1));
         board.Add(new Square("Chance Square"));
         board.Add(new Property("Indiana Avenue", 220.0, -1));
@@ -365,8 +100,6 @@ class Program {
                     bool turn = true;
 
                     while (turn) {
-
-                        bool rolled = false;
                         
                         Console.WriteLine($"{player[i].name} Turn: {turnCount} Cash: ${player[i].cash}");
                         Console.WriteLine($"current position: {board[player[i].position].name}");
@@ -390,14 +123,12 @@ class Program {
 
                                         player[i].position -= board.Count;
 
-                                        player[i] = passGo(player[i]);
+                                        player[i] = Player.passGo(player[i]);
 
                                     }
 
                                     if (board[player[i].position] is not Property) {
-
-                                        turn = false;
-
+                                        
                                         Square space = board[player[i].position];
 
                                         Console.WriteLine($"You landed on {space.name}");
@@ -406,21 +137,21 @@ class Program {
 
                                             case "GO TO JAIL": {
 
-                                                player[i] = goToJail(player[i]);
+                                                player[i] = Player.goToJail(player[i]);
 
                                                 break;
 
                                             }
                                             case "Chance Square": {
 
-                                                player[i] = ChanceCard(player[i]);
+                                                player[i] = Player.chanceCard(player[i]);
 
                                                 break;
 
                                             }
                                             case "Tax Office": {
 
-                                                player[i] = tax(player[i]);
+                                                player[i] = Player.tax(player[i]);
 
                                                 break;
 
@@ -444,7 +175,7 @@ class Program {
                                         if (space.owner != -1) {
 
                                                 
-                                            Console.WriteLine($"You landed on {space.name}");
+                                            Console.WriteLine($"You landed on {space.name}, which can be bought for ${space.price * 5}");
 
 
                                         }
@@ -456,8 +187,6 @@ class Program {
                                         }
 
                                     }
-
-                                rolled = true;
 
                                 turn = false;
 
@@ -541,7 +270,7 @@ class Program {
                             }
                             case "steal": {
 
-                                player[i] = steal(player[i]);
+                                player[i] = Player.steal(player[i]);
 
                                 break;
 
@@ -569,19 +298,14 @@ class Program {
 
                     Ai computer = (Ai) player[i];
 
-                    Console.WriteLine($"{computer.name} Cash: {computer.cash}");
+                    Console.WriteLine($"{computer.name} Turn: {turnCount} Cash: {computer.cash}");
 
                     Console.ReadKey(true);
 
                     string aiAction = computer.autoAction();
 
-                    if (board[computer.position] is not Property) {
-
-                        //effect already happened nothing!
-
-                    }
-                    //player is standing on property
-                    else {
+                    //player is standing on square
+                    if (!(board[computer.position] is not Property)) {
 
                         Property space = (Property) board[computer.position];
                                 
@@ -599,7 +323,7 @@ class Program {
 
                             if (computer.cash >= space.price * 5 && space.owner != -1 && computer.autoAction().Equals("buy and steal")) {
 
-                                Console.WriteLine($"{computer.name} bought out {space.name} from {player[space.owner].name}");
+                                Console.WriteLine($"{computer.name} bought out {space.name} from {player[space.owner].name} for {space.price * 5}");
 
                                 Console.ReadKey(true);
 
@@ -619,13 +343,12 @@ class Program {
 
                             double amount = (double) random.Next(computer.intensity * 20, 501);
 
-                            Console.WriteLine($"{computer.name} tried stealing ${amount} from the bank!");
-
-                            Console.ReadKey(true);
+                            //Console.WriteLine($"{computer.name} tried stealing ${amount} from the bank!");
+                            //Console.ReadKey(true);
 
                             double bank = (double) random.Next(1, 501);
 
-                            Console.WriteLine($"The banker will notice if ${bank} is gone");
+                            //Console.WriteLine($"The banker will notice if ${bank} is gone");
 
                             Console.ReadKey(true);
 
@@ -644,14 +367,13 @@ class Program {
 
                                     Console.ReadKey(true);
 
-                                    computer = (Ai) goToJail(computer);
+                                    computer = (Ai) Player.goToJail(computer);
 
                                 }
 
                         }
 
                     }
-                    
 
                     int diceRoll = random.Next(1, 13);
 
@@ -665,7 +387,7 @@ class Program {
 
                         computer.position -= board.Count;
 
-                        computer = (Ai) passGo(computer);
+                        computer = (Ai) Player.passGo(computer);
 
                     }
 
@@ -681,21 +403,21 @@ class Program {
 
                             case "GO TO JAIL": {
 
-                                computer = (Ai) goToJail(computer);
+                                computer = (Ai) Player.goToJail(computer);
 
                                 break;
 
                             }
                             case "Chance Square": {
 
-                                computer = (Ai) ChanceCard(computer);
+                                computer = (Ai) Player.chanceCard(computer);
 
                                 break;
 
                             }
                             case "Tax Office": {
 
-                                computer = (Ai) tax(computer);
+                                computer = (Ai) Player.tax(computer);
 
                                 break;
 
@@ -723,6 +445,7 @@ class Program {
 
             turnCount++;
 
+            //gameover if player 1 wins or loses
             if (player[0].cash <= 0.0) {
 
                 Console.WriteLine($"{player[0].name} went bankrupt!");
