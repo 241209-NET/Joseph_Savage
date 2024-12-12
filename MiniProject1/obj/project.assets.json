@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\Mini_Project1\\Mini_Project1\\MiniProject1\\Mini_Project1.csproj",
+      "projectUniqueName": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\git\\MiniProject1\\Mini_Project1.csproj",
       "projectName": "Mini_Project1",
-      "projectPath": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\Mini_Project1\\Mini_Project1\\MiniProject1\\Mini_Project1.csproj",
+      "projectPath": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\git\\MiniProject1\\Mini_Project1.csproj",
       "packagesPath": "C:\\Users\\Joey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\Mini_Project1\\Mini_Project1\\MiniProject1\\obj\\",
+      "outputPath": "C:\\Users\\Joey\\Desktop\\Revature Folder\\.NET\\git\\MiniProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Joey\\AppData\\Roaming\\NuGet\\NuGet.Config"
