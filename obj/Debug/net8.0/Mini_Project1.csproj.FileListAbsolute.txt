@@ -1,0 +1,14 @@
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\bin\Debug\net8.0\Mini_Project1.exe
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\bin\Debug\net8.0\Mini_Project1.deps.json
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\bin\Debug\net8.0\Mini_Project1.runtimeconfig.json
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\bin\Debug\net8.0\Mini_Project1.dll
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\bin\Debug\net8.0\Mini_Project1.pdb
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.AssemblyInfoInputs.cache
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.AssemblyInfo.cs
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.csproj.CoreCompileInputs.cache
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.dll
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\refint\Mini_Project1.dll
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.pdb
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\Mini_Project1.genruntimeconfig.cache
+C:\Users\Joey\Desktop\Revature Folder\.NET\Mini_Project1\obj\Debug\net8.0\ref\Mini_Project1.dll
