@@ -1,0 +1,6 @@
+@PeriodicTable.API_HostAddress = http://localhost:5003
+
+GET {{PeriodicTable.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
