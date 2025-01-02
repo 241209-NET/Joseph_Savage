@@ -48,9 +48,12 @@ public class DiscovererRepository : IDiscovererRepository
         }
     }
 
+    //RAN out of time to implement!
     public Discoverer? GetDiscovererOfElement(int Enumber)
     {
-         return _periodicTableContext.Discoverers.Find(Enumber);
+
+         return _periodicTableContext.Discoverers.Include(d => d.ElementDiscovered).Include(g => g.ElementDiscovered.Egroup).FirstOrDefault(d => d.Enumber == Enumber);
+         
     }
 
     //NOTE TO Leave remove line ""did": 0," to prevent error

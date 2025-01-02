@@ -39,6 +39,17 @@ public class DiscovererController : ControllerBase
         return Ok(findDiscoverer);
     }
 
+
+    [HttpGet("element/{number}")]
+    public IActionResult GetDiscovererOfElement(int number)
+    {
+        var findDiscoverer = _discovererService.GetDiscovererOfElement(number);
+
+        if(findDiscoverer is null) return NotFound();
+        
+        return Ok(findDiscoverer);
+    }
+
     [HttpDelete]
     public IActionResult DeleteDiscovererByDid(int Did)
     {
@@ -49,10 +60,4 @@ public class DiscovererController : ControllerBase
         return Ok(deleteDiscoverer);
     }
 
-
-    // [HttpDelete]
-    // public IActionResult DeleteElement(int Enumber)
-    // {
-
-    // }
 }
