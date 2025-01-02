@@ -39,6 +39,16 @@ public class DiscovererController : ControllerBase
         return Ok(findDiscoverer);
     }
 
+    [HttpGet("name/{Lname}")]
+    public IActionResult GetDiscovererByLastName(string Lname)
+    {
+        var findDiscoverer = _discovererService.GetDiscovererByLastName(Lname);
+
+        if(findDiscoverer is null) return NotFound();
+        
+        return Ok(findDiscoverer);
+    }
+
 
     [HttpGet("element/{number}")]
     public IActionResult GetDiscovererOfElement(int number)
