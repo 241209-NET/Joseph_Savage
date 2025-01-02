@@ -36,4 +36,30 @@ public class GroupControllerTest
         
     }
 
+[Fact]
+public void GetGroupsByGroupNumberReturnsCorrectly()
+{
+    // Arrange
+    var group = new Group
+    { 
+        Gnumber = 1, 
+        Gname = "Alkali Metals" 
+    };
+
+    var mockRepo = new Mock<IGroupRepository>();
+    // Return the group when GetGroupByGnumber(1) is called
+    mockRepo.Setup(repo => repo.GetGroupByGnumber(1)).Returns(group);
+
+    var groupService = new GroupService(mockRepo.Object);
+
+    // Act
+    var result = groupService.GetGroupByGnumber(1);
+
+    // Assert
+    Assert.NotNull(result);  // Ensure that the result is not null
+    Assert.Equal(group, result); // Compare the actual group with the returned result
+    mockRepo.Verify(repo => repo.GetGroupByGnumber(1), Times.Once); // Verify the method was called once
 }
+
+}
+

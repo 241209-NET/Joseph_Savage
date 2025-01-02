@@ -31,15 +31,6 @@ builder.Services.AddScoped<IDiscovererRepository, DiscovererRepository>();
 // Add controllers to the service container
 builder.Services.AddControllers();
 
-//Add our controllers
-/*
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-    });
-    */
-
 var app = builder.Build();
 
 // Enable Swagger UI in development environment
