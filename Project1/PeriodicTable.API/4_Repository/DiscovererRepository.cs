@@ -76,13 +76,19 @@ public class DiscovererRepository : IDiscovererRepository
             }
             else 
             {
+                if (GetDiscovererOfElement(existingElement.Enumber) == null) 
+                {
 
-                // Link the existing Element to the Discoverer
-                newDiscoverer.ElementDiscovered = existingElement;
 
-                // Add and save the Discoverer
-                _periodicTableContext.Discoverers.Add(newDiscoverer);
-                _periodicTableContext.SaveChanges();
+                    // Link the existing Element to the Discoverer
+                    newDiscoverer.ElementDiscovered = existingElement;
+
+                    // Add and save the Discoverer
+                    _periodicTableContext.Discoverers.Add(newDiscoverer);
+                    _periodicTableContext.SaveChanges();
+
+
+                }
 
             }
 
